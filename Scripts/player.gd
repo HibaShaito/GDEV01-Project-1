@@ -12,6 +12,8 @@ var startPosition
 var isAlive=true
 var lives=3
 
+var fell=false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Eventbus.playerHit.connect(takeDamage)
@@ -63,12 +65,14 @@ func die():
 	print("lives left " + str(lives))
 	
 func fall():
-	if position.y<-5:
+	if position.y<-5 && not fell:
+		fell=true
 		position=startPosition
 		die()
 	
 	
 func respawn():
+	fell=false
 	if lives>0:
 		health=maxHealth
 		isAlive=true
