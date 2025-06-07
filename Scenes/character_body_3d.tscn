@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnmblxr2ruyj0"]
+
+[ext_resource type="Script" uid="uid://bfmej8q5ec5gk" path="res://Scripts/player.gd" id="1_vd578"]
+[ext_resource type="Material" uid="uid://c7bk26bkr78wf" path="res://Assest/material.tres" id="2_vd578"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c7tqt"]
+material = ExtResource("2_vd578")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nl27k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fb3t6"]
+bg_color = Color(0.471358, 0.565318, 0.976186, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fb3t6"]
+font_size = 35
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_vd578")
+metadata/_edit_horizontal_guides_ = [823.0]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_vd578")
+mesh = SubResource("CapsuleMesh_c7tqt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_nl27k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 301.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_fb3t6")
+value = 100.0
+
+[node name="Lives" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Lives"
+label_settings = SubResource("LabelSettings_fb3t6")

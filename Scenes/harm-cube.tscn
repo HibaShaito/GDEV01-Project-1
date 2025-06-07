@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw2s3f6dik45c"]
+
+[ext_resource type="Texture2D" uid="uid://txcncowi8lcp" path="res://Assest/icon.svg" id="1_xf31w"]
+[ext_resource type="Script" uid="uid://dq2bxpmb7k18w" path="res://Scripts/harm_cube.gd" id="2_n67l1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n67l1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8f3a"]
+albedo_texture = ExtResource("1_xf31w")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgjto"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohfun"]
+size = Vector3(1.05, 1.05, 1.05)
+
+[node name="harm_cube" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n67l1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_q8f3a")
+mesh = SubResource("BoxMesh_lgjto")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_n67l1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ohfun")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

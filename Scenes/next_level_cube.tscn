@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://s2w3er43eh8s"]
+
+[ext_resource type="Texture2D" uid="uid://citsj5q8msic8" path="res://Assest/miku.jpg" id="1_7ew1h"]
+[ext_resource type="Script" uid="uid://bbihwc0srg0fn" path="res://Scripts/level_finish.gd" id="2_1ai5f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3nvrr"]
+albedo_texture = ExtResource("1_7ew1h")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_vedvi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_weuok"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xmlrt"]
+
+[node name="next_level_cube" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_3nvrr")
+mesh = SubResource("BoxMesh_vedvi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_weuok")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_1ai5f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+shape = SubResource("BoxShape3D_xmlrt")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
